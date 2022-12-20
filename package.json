@@ -1,0 +1,32 @@
+{
+  "name": "serrevisualisationdataback",
+  "version": "1.0.0",
+  "description": "back",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MBPMM-DevSecOps/SerreVisualisationDataBack.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/MBPMM-DevSecOps/SerreVisualisationDataBack/issues"
+  },
+  "homepage": "https://github.com/MBPMM-DevSecOps/SerreVisualisationDataBack#readme",
+  "dependencies": {
+    "@types/express": "^4.17.15",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20",
+    "typescript": "^4.9.4"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.47.0",
+    "@typescript-eslint/parser": "^5.47.0",
+    "eslint": "^8.30.0"
+  }
+}
