@@ -42,7 +42,8 @@ app.get('/', (req, res) => {
 
 app.post('/statistique', /* verifyToken, */ (req, res) => {
   const { startDate, endDate } = req.body;
-  const query = `SELECT * FROM stats`;
+/*   const query = `SELECT * FROM stats WHERE date BETWEEN '${startDate}' AND '${endDate}'`;
+ */  const query = `SELECT * FROM stats`;
   pool.query(query
     , (err, results) => {
       if (err) {
