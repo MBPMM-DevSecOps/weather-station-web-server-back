@@ -20,18 +20,18 @@ const verifyToken = (req, res, next) => {
   next();
 };
 
-/* const pool = mariadb.createPool({
+const pool = mariadb.createPool({
   host: 'localhost',
   user: 'admin_serre',
   password: '132456',
   database: 'data_serre',
-}); */
+});
 
-const pool = mariadb.createPool({
+/* const pool = mariadb.createPool({
   host: 'localhost',
   user: 'root',
   database: 'data_serre',
-});
+}); */
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -40,20 +40,23 @@ app.get('/', (req, res) => {
   res.send('Hello World fdp!');
 });
 
-app.post('/statistique', /* verifyToken, */ (req, res) => {
+app.post('/statistique', /* verifyToken, */(req, res) => {
   const { startDate, endDate } = req.body;
-/*   const query = `SELECT * FROM stats WHERE date BETWEEN '${startDate}' AND '${endDate}'`;
- */  const query = `SELECT * FROM stats`;
-  pool.query(query
-    , (err, results) => {
-      if (err) {
-        res.status(500).send('Erreur lors de la récupération des statistiques');
-      } else {
-        console.log("retour");
-        res.json(results);
-      }
+  pool.getConnection()
+    .then(conn => {
+      conn.query(`SELECT * FROM stats WHERE date BETWEEN '${startDate}' AND '${endDate}'`)
+        .then((rows) => {
+          res.send(rows);
+        })
+        .catch(err => {
+          res.send(err);
+          conn.end();
+        })
+    }).catch(err => {
+      console.log(err);
     });
 });
+
 
 app.listen(port, () => {
   return console.log("test");
