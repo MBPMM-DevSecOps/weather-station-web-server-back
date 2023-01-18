@@ -1,10 +1,13 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import mariadb from 'mariadb';
+import cors from 'cors';
 
-const app = express();
+const app = express().use('*', cors());;
 const port = 3001;
 const validToken = "auboulot";
+
+
 
 
 const verifyToken = (req, res, next) => {
@@ -44,7 +47,7 @@ app.post('/statistique', /* verifyToken, */(req, res) => {
   const { startDate, endDate } = req.body;
   pool.getConnection()
     .then(conn => {
-      conn.query(`SELECT * FROM stats WHERE date BETWEEN '${startDate}' AND '${endDate}'`)
+      conn.query(`SELECT * FROM stats WHERE timestamp BETWEEN '${startDate}' AND '${endDate}'`)
         .then((rows) => {
           res.send(rows);
         })
